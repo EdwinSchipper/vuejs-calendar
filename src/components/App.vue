@@ -27,14 +27,21 @@
 
     export default {
         data() {
-            return { 
-                msg: 'Vue Calender',
-                month: 9,
-                year: 2020
-            };
+            // return { 
+            //     msg: 'Vue Calender',
+            //     month: 9,
+            //     year: 2020
+            // };
         },
 
+        // Computed properties
         computed: {
+            month() {
+                return this.$store.state.currentMonth;
+            },
+            year() {
+                return this.$store.state.currentYear;
+            },
             days() {
 
                 // Generating all days in current month
