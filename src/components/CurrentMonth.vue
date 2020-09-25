@@ -10,10 +10,22 @@
 export default {
     methods: {
         dec() {
-            console.log('---');
+            if(this.month === 1) {
+                // call the commit methode on the store
+                // pas in the name of the mutation + payload
+                this.$store.commit('setCurrentMonth', 12); 
+                this.$store.commit('setCurrentYear', this.year - 1); 
+            } else {
+                this.$store.commit('setCurrentMonth', this.month - 1); 
+            }
         },
         inc() {
-            console.log('+');
+            if(this.month === 12) {
+                this.$store.commit('setCurrentMonth', 1); 
+                this.$store.commit('setCurrentYear', this.year + 1); 
+            } else {
+                this.$store.commit('setCurrentMonth', this.month + 1); 
+            }
         }
     },
     computed: {
@@ -25,7 +37,7 @@ export default {
         },
         year() {
             return this.$store.state.currentYear;
-        },
+        }
     }
 }
 </script>
