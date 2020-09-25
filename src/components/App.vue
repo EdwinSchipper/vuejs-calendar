@@ -1,25 +1,36 @@
 <template>
-    <div> 
+    <div>
         {{ msg }}
-        
-        <!-- Loop Weeks array data -->
-        <div v-for="currentWeek in weeks">
-            
-            Week
-            <!-- loop trough current Week array -->
-            <div v-for="day in currentWeek">{{ day }}</div>
-
+        <div id="day-bar">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
         </div>
+    
+        <div id="calendar"> 
+            <!-- Loop Weeks array data -->
+            <div v-for="currentWeek in weeks" class="calendar-week">
+                <!-- loop trough current Week (multi-dimensional) array -->
+                <calender-day v-for="day in currentWeek" :day="day"></calender-day>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script>
+    import CalenderDay from './CalenderDay.vue';
+
     export default {
         data() {
             return { 
                 msg: 'Vue Calender',
-                month: 5,
-                year: 2017
+                month: 9,
+                year: 2020
             };
         },
 
@@ -80,6 +91,9 @@
             }
         },
 
+        components: {
+            CalenderDay
+        },
 
         created() {
             console.log(this.$moment); // Acces to the moment libary
