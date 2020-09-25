@@ -1,6 +1,14 @@
 <template>
     <div>
-        {{ msg }}
+        <div id="header">
+            <div>
+                <h1>{{ msg }}</h1>
+            </div>
+            <div>
+                <current-month></current-month>
+            </div>
+        </div>
+        
         <div id="day-bar">
             <div>Mon</div>
             <div>Tue</div>
@@ -24,14 +32,15 @@
 
 <script>
     import CalenderDay from './CalenderDay.vue';
+    import CurrentMonth from './CurrentMonth.vue';
 
     export default {
         data() {
-            // return { 
-            //     msg: 'Vue Calender',
-            //     month: 9,
-            //     year: 2020
-            // };
+            return { 
+                msg: 'Vue.js Calendar',
+                // month: 9,
+                // year: 2020
+            };
         },
 
         // Computed properties
@@ -99,7 +108,8 @@
         },
 
         components: {
-            CalenderDay
+            CalenderDay,
+            CurrentMonth
         },
 
         created() {

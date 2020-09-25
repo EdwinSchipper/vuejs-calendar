@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import './style.scss';
 
-import Vuex from 'vuex'; // import plugin
-Vue.use(Vuex); // use plugin in Vue
+import store from './store';
 
 import moment from 'moment-timezone'; // Import time libary
 moment.tz.setDefault("UTC"); // Set default time to UTC zone
@@ -18,10 +17,5 @@ new Vue({
   components: {
     App
   },
-  store: { // store propertie
-    state: {
-      currentYear: 2020,
-      currentMonth: 9
-    }
-  }
+  store // Store propertie (store/index.js)
 });
