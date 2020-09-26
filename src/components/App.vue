@@ -27,12 +27,16 @@
             </div>
         </div>
 
+        <event-form></event-form>
+
     </div>
 </template>
 
 <script>
     import CalenderDay from './CalenderDay.vue';
     import CurrentMonth from './CurrentMonth.vue';
+    import EventForm from './EventForm.vue';
+
 
     export default {
         data() {
@@ -109,7 +113,8 @@
 
         components: {
             CalenderDay,
-            CurrentMonth
+            CurrentMonth,
+            EventForm
         },
 
         created() {

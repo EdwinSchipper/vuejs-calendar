@@ -6,8 +6,11 @@ Vue.use(Vuex); // use plugin in Vue
 // store propertie
 export default new Vuex.Store({
     state: {
+        // Data properties
         currentYear: 2020,
-        currentMonth: 9
+        currentMonth: 9,
+        eventFormPosX: 0,
+        eventFormPosY: 0
     },
     mutations: {
         // Mutations have always two properties, state and payload (any data)
@@ -16,6 +19,10 @@ export default new Vuex.Store({
         },
         setCurrentYear(state, payload) {
             state.currentYear = payload;
+        },
+        eventFormPos(state, payload) {
+            state.eventFormPosX = payload.x;
+            state.eventFormPosY = payload.y;
         }
     }
 });

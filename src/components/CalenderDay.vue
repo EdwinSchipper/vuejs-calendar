@@ -1,5 +1,7 @@
 <template>
-    <div v-bind:class="classObject">{{ day.format('D') }} </div>
+    <!-- Shorthand Click Event: @click="" --> 
+    <!-- Attach a function (captureClick) when click -->
+    <div v-bind:class="classObject" @click="captureClick">{{ day.format('D') }} </div>
 </template>
 
 <script>
@@ -14,6 +16,14 @@ export default {
                 today, // true of false
                 past: this.day.isSameOrBefore(this.$moment(), 'day') && !today
             };
+        }
+    },
+    methods: {
+        captureClick(event) {
+            console.log(event);
+
+            // Create mutation + payload
+            this.$store.commit('eventFormPos', { x: event.clientX, y: event.clientY });
         }
     }
 }
