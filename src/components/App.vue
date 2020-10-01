@@ -21,9 +21,9 @@
     
         <div id="calendar"> 
             <!-- Loop Weeks array data -->
-            <div v-for="currentWeek in weeks" class="calendar-week">
+            <div v-for="week in weeks" class="calendar-week">
                 <!-- loop trough current Week (multi-dimensional) array -->
-                <calender-day v-for="day in currentWeek" :day="day"></calender-day>
+                <calender-day v-for="day in week" :day="day"></calender-day>
             </div>
         </div>
 

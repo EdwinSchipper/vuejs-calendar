@@ -8,9 +8,10 @@ export default new Vuex.Store({
     state: {
         // Data properties
         currentYear: 2020,
-        currentMonth: 9,
+        currentMonth: 10,
         eventFormPosX: 0,
-        eventFormPosY: 0
+        eventFormPosY: 0,
+        eventFormActive: false
     },
     mutations: {
         // Mutations have always two properties, state and payload (any data)
@@ -23,6 +24,10 @@ export default new Vuex.Store({
         eventFormPos(state, payload) {
             state.eventFormPosX = payload.x;
             state.eventFormPosY = payload.y;
+        },
+        eventFormActive(state, payload) {
+            state.eventFormActive = payload;
+
         }
     }
 });
