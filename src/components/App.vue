@@ -2,6 +2,7 @@
     <div>
         <div id="header">
             <div>
+                <img src="../assets/logo.png" alt="">
                 <h1>{{ msg }}</h1>
             </div>
             <div>
