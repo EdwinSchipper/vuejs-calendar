@@ -35,5 +35,16 @@ new Vue({
   components: {
     App
   },
-  store // Store propertie (store/index.js)
+  store, // Store propertie (store/index.js)
+  render(createElement) {
+    return createElement ( 
+      // return virtual node
+        // 1 what element?
+        // 2 What options?
+        // 3 Array for children
+      'div',
+      { attrs: { id: 'app'} },
+      [ createElement('app') ]
+    );
+  }
 });
