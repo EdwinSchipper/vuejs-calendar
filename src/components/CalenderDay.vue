@@ -15,13 +15,10 @@ export default {
     computed: {
         // Create event list-items
         events() {
-            let mockData = [
-                { description: 'Random event 1', date: this.$moment('2020-09-28', 'YYYY-MM-DD') },
-                { description: 'Random event 2', date: this.$moment('2020-10-01', 'YYYY-MM-DD') },
-                { description: 'Random event 3', date: this.$moment('2020-10-17', 'YYYY-MM-DD') }
-            ];
-            // Return data met filter condities
-            return mockData.filter(event => event.date.isSame(this.day, 'day'));
+            
+            // Get (events) value from Vuex store and return data with filter conditions
+            return this.$store.state.events.filter(event => event.date.isSame(this.day, 'day'));
+
         },
         // Create css classes
         classObject() {
@@ -36,10 +33,10 @@ export default {
     methods: {
         captureClick(event) {
             console.log(event);
-
-            // Create mutation + payload
+            // Create mutation + payload. From VueX store (index.js)
             this.$store.commit('eventFormPos', { x: event.clientX, y: event.clientY }); // Set Position
             this.$store.commit('eventFormActive', true); // Switch class active to true
+            this.$store.commit('eventFormDate', this.day); // Get clicked date
         }
     }
 }
