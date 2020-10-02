@@ -34,12 +34,13 @@ export default {
             this.$store.commit('eventFormActive', false);
         },
         create() {
-            alert('Create Event ..');
             if(this.description.length > 0 ) {
-                // Call function AddEvent from VueX store
-                this.$store.commit('addEvent', this.description);
-                this.description = '';
-                this.$store.commit('eventFormActive', false);
+                // Call actions function AddEvent from VueX store
+                this.$store.dispatch('addEvent', this.description).then(_ => {
+                    this.description = '';
+                    this.$store.commit('eventFormActive', false);
+                });
+
             } else {
                 alert('No input for event');
             }
