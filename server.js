@@ -19,26 +19,40 @@ let events = [
   { description: 'Random event 3', date: moment('2020-10-17', 'YYYY-MM-DD') }
 ];
 
+let renderer;
 
 app.get('/', (req, res) => {
   let template = fs.readFileSync(path.resolve('./index.html'), 'utf-8');
   let contentMarker = '<!--APP-->';
-  res.send(template.replace(contentMarker, `<script>var __INITIAL_STATE__ = ${ serialize(events) }</script>`));
+  if(renderer) {
+    renderer.renderToString({ events }, (err, html) => {
+      if(err) {
+        console.log(err);
+      } else {
+        // console.log(html);
+        res.send(template.replace(contentMarker, `<script>var __INITIAL_STATE__ = ${serialize(events)}</script>\n${html}`));
+      }
+    });
+  } else {
+    res.send('<p>Awaiting compilation..</p>');
+  }
+  
+
 });
 
 
 // Body parser
 app.use(require('body-parser').json());
 
-
 // Add new route in express framework
 app.post('/add_event', (req, res) => {
-  console.log('received');
-  console.log(req.body); // body is incoming request
-  events.push(req.body); // Push incoming request in events array
+  console.log(req.body); // req.body is incoming request
+  events.push({
+    description: req.body.description,
+    date: moment(req.body.date)
+  }); 
   res.sendStatus(200);
  });
-
 
 const server = http.createServer(app);
 
@@ -46,6 +60,10 @@ if (process.env.NODE_ENV === 'development') {
   const reload = require('reload');
   const reloadServer = reload(app);
   require('./webpack-dev-middleware').init(app);
+  require('./webpack-server-compiler').init(function(bundle) {
+    console.log('Node bundle built');
+    renderer = require('vue-server-renderer').createBundleRenderer(bundle);
+  });
 }
 
 server.listen(process.env.PORT, function () {
